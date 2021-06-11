@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_opens" inherit_id="sale.report_saleorder">
+        <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="replace">
+            <div class="header" t-att-style="report_header_style" style="font-family:Arial, Helvetica, sans-serif; max-height: 160px !important;">
+                <div class="row mb8" style="margin-left:8px; margin-right:8px; margin-bottom: 0px !important;">
+                    <t t-if="not o and doc">
+                        <t t-set="o" t-value="doc"/>
+                    </t>
+
+                    <t t-if="o and 'company_id' in o">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-if="not o or not 'company_id' in o">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="padding:0px !important; width:50% !important;">
+                                    <div style="text-align:left;">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 240px;width: 230px;"/>
+                                    </div>
+                                </td>
+
+                                <td style="padding:0px !important;">
+                                    <div style="text-align:justify; font-size:10px; margin-top:40px;">
+                                        <p style="float:right;">
+                                            <span t-field="company.street"/>
+                                            &#160;&#160;&#160;
+                                            &#160;&#160;&#160;
+                                            <span t-field="company.city"/>
+                                            &#160;&#160;&#160;
+                                            <span t-field="company.country_id" style="float:right;"/>
+                                            <br/>
+                                            
+                                            <span>
+                                                Dunati Chile Spa.
+                                                &#160;&#160;&#160;
+                                                &#160;&#160;&#160;
+                                                <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/><span t-field="company.phone"/>
+                                                <i class="far fa-envelope" role="img" aria-label="Email" title="Email" style="float:right;">
+                                                    &#160;&#160;
+                                                    <span t-field="company.email"/>
+                                                </i>
+                                            </span><br/>
+
+                                            <span>
+                                                <strong>Datos de transferencia:</strong>
+                                                &#160;&#160;&#160;
+                                                RUT 76.515.462-6
+                                                &#160;&#160;&#160;
+                                                &#160;&#160;&#160;
+                                                Banco Santander
+                                            </span><br/>
+                                            <span>
+                                                &#160;&#160;&#160;
+                                                Cta. Cte. 71334899
+                                                &#160;&#160;&#160;
+                                                &#160;&#160;&#160;
+                                                &#160;&#160;&#160;
+                                                Finanzas@dunati.com
+                                            </span><br/>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" style="margin-left:8px; margin-right:8px; margin-top:-50px !important; max-height: 90px !important;">
+                        <table class="table table-condensed" >
+                            <tbody>
+                                <tr>
+                                    <td style="padding:0px !important;">
+                                        <div style="text-align:justify; font-size:10px;">
+                                            <p style="float:left;">
+                                                <span><strong>Señores:</strong></span> <br/>
+                                                
+                                                <span><strong>Atención:</strong></span>
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;&#160;
+                                                <span t-field="o.partner_id.name"/><br/>
+                                                
+                                                <span><strong>Dirección:</strong></span>
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;
+                                                <span t-field="o.partner_id.city"/><br/>
+                                                
+                                                <span><strong>Teléfonos:</strong></span>
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;
+                                                <span t-field="o.partner_id.phone"/><br/>
+                                                
+                                                <span><strong>Email:</strong></span>
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;
+                                                <span t-field="o.partner_id.email"/><br/>
+                                                
+                                                <span><strong>Atendido por:</strong></span>
+                                                &#160;&#160;&#160;&#160;&#160;
+                                                <span t-field="o.user_id.name"/>
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/><span t-field="o.user_id.phone"/>
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                <i class="far fa-envelope" role="img" aria-label="Email" title="Email"/>&#160;&#160;<span t-field="o.user_id.email"/>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td style="padding:0px !important; width:30%;">
+                                        <div style="text-align:justify; font-size:10px; padding-left:40%;">
+                                            <p style="float:left;">
+                                                <span><strong>N° de Página:</strong></span> <span class="page"/> de <span class="topage"/><br/>
+                                                
+                                                <span><strong>Cotización N°:</strong></span>
+                                                <span t-field="o.name"/> <br/>
+                                                
+                                                <span><strong>F. de Emisión:</strong></span>
+                                                <span t-field="o.create_date" t-options='{"widget": "date"}'/> <br/>
+                                                
+                                                <span><strong>Vigente Hasta:</strong></span>
+                                                <span t-field="o.date_order" t-options='{"widget": "date"}'/>
+                                                <br/>
+                                                <span><strong>Condic. Pago:</strong></span>
+                                                <span t-field="o.payment_term_id"/>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <t t-call="web.external_layout">
+                <div class="page" style="font-family:Arial, Helvetica, sans-serif;">
+                        <table class="table" style="text-align:left; font-size:10px; ">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Imagen</th>
+                                    <th class="text-center">Código</th>
+                                    <th class="text-center">Descripción</th>
+                                    <th class="text-center">Cant.</th>
+                                    <th class="text-center">Precio U.</th>
+                                    <th class="text-center">Desc.</th>
+                                    <th class="text-center">Total Neto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.order_line" t-as="line">
+                                    <div>
+                                        <td class="text-center"><img t-if="line.product_id.image_1920" t-att-src="'data:image/png;base64,%s' % to_text(line.product_id.image_1920)" style="max-height: 80px;width: 100px;margin: auto;"/></td>
+                                        <td class="text-center"><span t-field="line.product_id.default_code"/></td>
+                                        <td class="text-center" ><span t-field="line.name"/></td>
+                                        <td class="text-center">
+                                            <span t-esc="'{0:,.0f}'.format(int(line.product_qty))"/>
+                                            <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                                        </td>
+                                        <td class="text-right" ><span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                        <td class="text-right" ><span t-esc="line.calculate_discount(line.price_unit, line.discount)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                        <td class="text-right" >
+                                            <span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">
+                                        
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                    
+                <div class="footer" style="font-family:Arial, Helvetica, sans-serif;">
+                        <div class="row not-last-page" style="position:relative">
+                            <table class="table" style="margin:0px !important; ">
+                                <tbody>
+                                    <tr>
+                                        <td style="display:none;">
+                                            <div>
+                                            </div>
+                                        </td>
+                                        <td style="display:none;">
+                                            <div>
+
+                                            </div>
+                                        </td>
+                                        <td style="padding:0px !important;">
+                                            <div style="text-align:left; font-size:10px; padding-left:10%; float:right;">
+                                                <p>
+                                                    <span>_____________________________________</span> <br/>
+                                                    <span>
+                                                        <strong>Neto Página <span class="page"/></strong>
+                                                    </span>
+                                                    <!--<span t-esc="sum(l.price_subtotal for l in o.order_line)" style="float:right;"/><br/>-->
+                                                    <span t-esc="o.calculate_page_total()" style="float:right;" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0px !important; padding-right: 50px !important;">
+                                            <div style="text-align:left; font-size:10px; padding-top:-40%; position: absolute; bottom: 0; left: 0; ">
+                                                <p style="float:left;">
+                                                    <span>Continúa en la siguiente página -></span> <br/>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="display:none;">
+                                            <div>
+                                            </div>
+                                        </td>
+                                        <td style="display:none;">
+                                            <div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <div class="row last-page">
+                        <table class="table" style="margin:0 auto !important;">
+                            <tbody>
+                                <tr>
+                                    <td style="padding:0px !important; width:90% !important;">
+                                        <div style="text-align:left; font-size:9px; padding-top:-40%;">
+                                            <p style="float:left;">
+                                                <span><strong>Condiciones de venta:</strong></span> <br/>
+                                                <span>1. Tiempo de entrega 20 días hábiles para mobiliario y 7 días hábiles para sillas. Serán contados a partir de la fecha de aprobación<br/>
+                                                y firma de la presente cotización, recepción de anticipo, aprobación firmada de planos de distribución, materialidades y colores.</span> <br/>
+                                                <span>2. El horario de Instalación es de 9:00 a 17:30 horas. El valor adicional fuera de este horario es de 0.5 UF/hora</span> <br/>
+                                                <span>3. Garantía: 3 años en Mobiliario | 1 año en Sillas 4. El transporte e instalación de esta cotización están contemplados en Santiago, RM</span> <br/>
+                                                <span>5. A fin de no comprometer la calidad de nuestros productos, no se despachará mientras el CLIENTE no tenga las obras terminadas</span> <br/>
+                                                <br/>
+                                                <span><strong>Por el cliente:</strong></span> <br/>
+                                                <span>Nombre legible: ____________________________________________________Firma: __________________________ Fecha: ___________________</span><br/>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-right:10px;">
+                                        <div style="text-align:left; font-size:10px; float:right;">
+                                            <p>
+                                                <span><strong>Subtotal</strong></span>
+                                                <span t-esc="o.currency_id.symbol" style="margin-left:80px;"/>
+                                                <span t-esc="'{0:,.0f}'.format(int(o.amount_untaxed)).replace(',','.')" style="float:right;"/><br/>                                                
+                                                
+                                                <span><strong>Transp./Instalación</strong></span>
+                                                <span t-esc="o.currency_id.symbol" style="margin-left:28px;"/>
+                                                <span style="float:right;">0</span> <br/>
+                                                
+                                                <span><strong>Subtotal 2</strong></span>
+                                                <span t-esc="o.currency_id.symbol" style="margin-left:70px;"/>
+                                                <span t-esc="'{0:,.0f}'.format(int(o.amount_untaxed)+0).replace(',','.')" style="float:right;"/><br/>
+                                                
+                                                <span><strong>IVA (19%)</strong></span>
+                                                <span t-esc="o.currency_id.symbol" style="margin-left:72px;"/>
+                                                <span t-esc="'{0:,.0f}'.format(int(o.amount_tax)).replace(',','.')" style="float:right;"/><br/>
+                                                <span><strong>_____________________________________</strong> </span> <br/>
+                                                
+                                                <span><strong>Total</strong></span>
+                                                <span t-esc="o.currency_id.symbol" style="margin-left:95px;"/>
+                                                <span t-esc="'{0:,.0f}'.format(int(o.amount_total)).replace(',','.')" style="float:right;"/>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="not-last-page" style="text-align:justify; font-size:10px; margin-top:140px;">
+                        <p style="padding-left:45%;">
+                            <span style="bottom:0; left:0; color: #A9A9A9;">www.dunati.com</span>
+                        </p>
+                    </div>
+                    <div class="last-page" style="text-align:justify; font-size:10px; margin-top:60px;">
+                        <p style="padding-left:45%;">
+                            <span style="bottom:0; left:0; color: #A9A9A9;">www.dunati.com</span>
+                        </p>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <record id="paperformat_sale_orders_opens" model="report.paperformat">
+        <field name="name">Solicitudes de Presupuesto y Notas de Ventas</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">50</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">45</field>
+        <field name="dpi">90</field>
+        <field name="report_ids" eval="[(4, ref('sale.action_report_saleorder'))]"/>
+    </record>
+
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="paperformat_id" ref="paperformat_sale_orders_opens" />
+    </record>
+</odoo>
